@@ -46,8 +46,7 @@ def load_test_data():
 
 # 2--> already have a file named result_api.csv
 def log_result_to_file(test_name, method, endpoint, status_code, result, message=""):
-    filename = "result_api.csv"  # Update the filename to the desired one
-    # Check if the file exists to decide whether to write headers
+    filename = "result_api.csv"  
     write_headers = False
     try:
         with open(filename, mode="r"):
@@ -245,7 +244,7 @@ def test_successful_post_request(BASE_URL,resources):
 def test_response_time(BASE_URL,resources):
     test_name = "Test Response Time"
     test_data = load_test_data()
-    post_data = test_data[0]  # the first post data
+    post_data = test_data[0]
     response = requests.post(f"{BASE_URL}/{resources}", json=post_data)
     result = "Success" if response.elapsed.total_seconds() < 0.3 else "Failure"
     if result == "Failure" :
@@ -258,7 +257,7 @@ def test_response_time(BASE_URL,resources):
 def test_title_matches_input_value(BASE_URL,resources):
     test_name = "Test Title Matches Input Value"
     test_data = load_test_data()
-    post_data = test_data[0]  # the first post data
+    post_data = test_data[0]  
     response = requests.post(f"{BASE_URL}/{resources}", json=post_data)
     json_data = response.json()
     result = "Success" if json_data["title"] == post_data["title"] else "Failure"
@@ -272,7 +271,7 @@ def test_title_matches_input_value(BASE_URL,resources):
 def test_response_body_contains_non_empty_body(BASE_URL,resources):
     test_name = "Test Response Body Contains Non-Empty Body"
     test_data = load_test_data()
-    post_data = test_data[0]  # the first post data
+    post_data = test_data[0]  
     response = requests.post(f"{BASE_URL}/{resources}", json=post_data)
     json_data = response.json()
     result = "Success" if json_data["body"] else "Failure"
@@ -286,7 +285,7 @@ def test_response_body_contains_non_empty_body(BASE_URL,resources):
 def test_response_body_contains_post_id(BASE_URL,resources):
     test_name = "Test Response Body Contains Post ID"
     test_data = load_test_data()
-    post_data = test_data[0]  # the first post data
+    post_data = test_data[0]
     response = requests.post(f"{BASE_URL}/{resources}", json=post_data)
     json_data = response.json()
     result = "Success" if "id" in json_data else "Failure"
@@ -300,7 +299,7 @@ def test_response_body_contains_post_id(BASE_URL,resources):
 def test_response_body_contains_post_body_property(BASE_URL,resources):
     test_name = "Test Response Body Contains Post Body Property"
     test_data = load_test_data()
-    post_data = test_data[0]  # the first post data
+    post_data = test_data[0]  
     response = requests.post(f"{BASE_URL}/{resources}", json=post_data)
     json_data = response.json()
     result = "Success" if "body" in json_data else "Failure"
@@ -314,7 +313,7 @@ def test_response_body_contains_post_body_property(BASE_URL,resources):
 def test_response_body_contains_post_title_property(BASE_URL,resources):
     test_name = "Test Response Body Contains Post Title Property"
     test_data = load_test_data()
-    post_data = test_data[0]  # the first post data
+    post_data = test_data[0]  
     response = requests.post(f"{BASE_URL}/{resources}", json=post_data)
     json_data = response.json()
     result = "Success" if "title" in json_data else "Failure"
@@ -451,7 +450,7 @@ def test_response_time(BASE_URL,resources,post_id):
 def test_response_body_is_empty_json(BASE_URL,resources,post_id):
     test_name = "Test Response Body is Empty JSON"
     response = requests.delete(f"{BASE_URL}/{resources}/{post_id}")
-    response_body = response.text.strip()  # Get the response body as text and strip whitespace
+    response_body = response.text.strip() 
     result = "Success" if response_body == "{}" else "Failure"
     if result == "Failure":
         log_result_to_file(test_name, "DELETE",f"{BASE_URL}/{resources}/{post_id}", response.status_code, result,f"Response body is not an empty JSON object: {response_body}")
