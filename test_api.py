@@ -18,7 +18,7 @@ def load_test_data():
 # 2 ways to save the results
 # 1--> to make an new file for results 
 # def log_result_to_file(test_name, method, endpoint, status_code, result, message=""):
-#     filename = "result.csv"
+#     filename = "result_new.csv"
 #     # Check if the file exists to decide whether to write headers
 #     write_headers = False
 #     try:
@@ -35,7 +35,7 @@ def load_test_data():
 
 # 2--> already have a file named result_api.csv
 def log_result_to_file(test_name, method, endpoint, status_code, result, message=""):
-    filename = "result_api.csv"  # Update the filename to the desired one
+    filename = "results.csv"  # Update the filename to the desired one
     # Check if the file exists to decide whether to write headers
     write_headers = False
     try:
